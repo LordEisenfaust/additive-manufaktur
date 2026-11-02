@@ -1,0 +1,95 @@
+---
+import { site } from '../config';
+import Logo from './Logo.astro';
+const jahr = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <Logo size={36} />
+      <div>
+        <strong>{site.name}</strong>
+        <p>{site.claim}<br />aus {site.address.city}</p>
+      </div>
+    </div>
+
+    <ul class="footer__links">
+      <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+      <li><a href={site.instagram.url} rel="noopener">Instagram {site.instagram.handle}</a></li>
+    </ul>
+
+    <ul class="footer__links">
+      <li><a href="/projekte/">Projekte</a></li>
+      <li><a href="/impressum/">Impressum</a></li>
+      <li><a href="/datenschutz/">Datenschutz</a></li>
+    </ul>
+  </div>
+  <div class="wrap footer__copy">© {jahr} {site.owner} · {site.name}</div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--ink);
+    color: #e9dfd2;
+    padding-block: 56px 28px;
+  }
+
+  .footer a {
+    color: #f3e9dc;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+
+  .footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+
+  .footer__inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 32px;
+  }
+
+  .footer__brand {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .footer__brand strong {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .footer__brand p {
+    margin: 4px 0 0;
+    font-size: 0.95rem;
+    color: #bfb1a2;
+  }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 8px;
+    align-content: start;
+  }
+
+  .footer__copy {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #4a3e36;
+    font-size: 0.85rem;
+    color: #9d8f81;
+  }
+
+  @media (max-width: 720px) {
+    .footer__inner {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,75 @@
+---
+import { Picture } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projekt: CollectionEntry<'projekte'>;
+}
+
+const { projekt } = Astro.props;
+const { titel, spiel, kurz, bild, bildAlt } = projekt.data;
+---
+
+<a class="karte" href={`/projekte/${projekt.id}/`}>
+  <Picture
+    src={bild}
+    formats={['avif', 'webp']}
+    widths={[400, 700]}
+    sizes="(max-width: 700px) 100vw, 380px"
+    alt={bildAlt}
+    class="karte__bild"
+  />
+  <div class="karte__text">
+    <span class="karte__spiel">{spiel}</span>
+    <h3>{titel}</h3>
+    <p>{kurz}</p>
+  </div>
+</a>
+
+<style>
+  .karte {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .karte:hover {
+    color: var(--ink);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+
+  .karte :global(.karte__bild) {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .karte__text {
+    padding: 22px 24px 26px;
+  }
+
+  .karte__spiel {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  .karte h3 {
+    margin: 6px 0 8px;
+  }
+
+  .karte p {
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+</style>

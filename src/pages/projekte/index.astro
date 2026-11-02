@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import ProjektKarte from '../../components/ProjektKarte.astro';
+
+const projekte = (await getCollection('projekte')).sort(
+  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+);
+---
+
+<Layout
+  title="Projekte"
+  description="Brettspiel-Inserts und 3D-Druck-Projekte der Additiven Manufaktur – passgenaue Sortiereinsätze in Einzelanfertigung."
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Projekte</span>
+        <h1>Aus der Werkstatt</h1>
+        <p class="lead">
+          Jedes Insert entsteht für ein bestimmtes Spiel. Dein Spiel ist noch nicht dabei?
+          <a href="/#anfrage">Schreib mir</a> – vielleicht wird es das nächste Projekt.
+        </p>
+      </div>
+      <div class="projekte">
+        {projekte.map((p) => <ProjektKarte projekt={p} />)}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .projekte {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
+  }
+</style>

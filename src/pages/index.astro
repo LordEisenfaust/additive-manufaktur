@@ -1,0 +1,614 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import ProjektKarte from '../components/ProjektKarte.astro';
+import Anfrage from '../components/Anfrage.astro';
+import { site } from '../config';
+import calico from '../assets/fotos/insert-calico.jpg';
+import drucker from '../assets/fotos/drucker.jpg';
+import cad from '../assets/fotos/cad-design.jpg';
+
+const projekte = (await getCollection('projekte')).sort(
+  (a, b) => a.data.reihenfolge - b.data.reihenfolge,
+);
+
+const schritte = [
+  {
+    titel: 'Anfrage',
+    text: 'Du schreibst mir, um welches Spiel es geht – mit Erweiterungen, Kartenhüllen und Wünschen.',
+  },
+  {
+    titel: 'Entwurf',
+    text: 'Ich vermesse das Material und konstruiere die Fächer im CAD. Vorab bekommst du ein Angebot.',
+  },
+  {
+    titel: 'Druck',
+    text: 'Das Insert wird gedruckt, eingepasst und bei Bedarf nachjustiert, bis alles sitzt.',
+  },
+  {
+    titel: 'Spielen',
+    text: 'Schachtel auf, Fächer raus, los geht’s. Nach der Partie hat alles wieder seinen Platz.',
+  },
+];
+
+const fragen = [
+  {
+    frage: 'Was kostet ein Insert?',
+    antwort:
+      'Das hängt vom Spiel ab: Wie viele Fächer, wie groß die Schachtel, wie viel Material. Nach deiner Anfrage bekommst du ein unverbindliches Angebot – erst dann geht es los.',
+  },
+  {
+    frage: 'Passt das Insert auch mit Erweiterungen oder Kartenhüllen?',
+    antwort:
+      'Ja, genau dafür ist die Einzelanfertigung da. Schreib mir einfach, welche Erweiterungen in die Schachtel sollen und ob deine Karten in Hüllen (Sleeves) stecken.',
+  },
+  {
+    frage: 'Kann ich eigene Dateien drucken lassen?',
+    antwort:
+      'Klar. Schick mir deine STL-Datei oder eine Vorlage, und ich drucke sie für dich. Wenn du noch kein Modell hast, konstruiere ich es nach deinen Maßen.',
+  },
+  {
+    frage: 'Kann ich mir die Farbe aussuchen?',
+    antwort:
+      'Gern – nenn mir deine Wunschfarbe in der Anfrage. Viele mögen es passend zur Schachtel, andere lieber dezent.',
+  },
+];
+---
+
+<Layout>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__text">
+        <span class="eyebrow">Brettspiel-Inserts nach Maß</span>
+        <h1>Endlich Ordnung in der Spiele&shy;schachtel.</h1>
+        <p class="lead">
+          Ich entwerfe und drucke passgenaue Sortiereinsätze für deine Brettspiele – damit der Aufbau
+          Sekunden dauert und nach der Partie alles seinen Platz hat.
+        </p>
+        <div class="hero__ctas">
+          <a class="btn btn--primary" href="#anfrage">Insert anfragen</a>
+          <a class="btn btn--ghost" href="/projekte/">Projekte ansehen</a>
+        </div>
+        <ul class="hero__facts">
+          <li>Einzelanfertigung</li>
+          <li>Eigenes Design</li>
+          <li>Aus Meerbusch</li>
+        </ul>
+      </div>
+
+      <figure class="hero__media">
+        <Picture
+          src={calico}
+          formats={['avif', 'webp']}
+          widths={[480, 760, 1100, 1400]}
+          sizes="(max-width: 860px) 100vw, 560px"
+          alt="Geöffnete Calico-Spieleschachtel mit einem pfirsichfarbenen 3D-gedruckten Insert, in dessen Fächern die Katzenplättchen sortiert sind"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <figcaption class="hero__badge">
+          <strong>Calico</strong>
+          <span>10 Fächer · eigenes Design</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- Leistungen -->
+  <section class="section" id="leistungen">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Leistungen</span>
+        <h2>Von der Idee bis zum fertigen Teil</h2>
+      </div>
+
+      <div class="leistungen">
+        <article class="leistung leistung--gross">
+          <div class="leistung__text">
+            <span class="leistung__tag">Schwerpunkt</span>
+            <h3>Inserts für Brettspiele</h3>
+            <p>
+              Sortiereinsätze, die exakt in deine Schachtel passen – für das Grundspiel, mit
+              Erweiterungen oder gesleevten Karten. Jedes Insert wird für dein Spiel konstruiert.
+            </p>
+            <a href="#anfrage">Insert anfragen →</a>
+          </div>
+          <Picture
+            src={cad}
+            formats={['avif', 'webp']}
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 860px) 100vw, 480px"
+            alt="Entwurf eines Sortiereinsatzes mit vier Fächern in der CAD-Software"
+            class="leistung__bild"
+          />
+        </article>
+
+        <article class="leistung">
+          <div class="leistung__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V9l6-5 6 5v11M9 20v-6h6v6" /></svg>
+          </div>
+          <h3>3D-Druck nach Auftrag</h3>
+          <p>Du hast schon eine STL-Datei oder Vorlage? Ich drucke sie sauber und zuverlässig für dich.</p>
+        </article>
+
+        <article class="leistung">
+          <div class="leistung__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M3 21l3-1 12-12-2-2L4 18l-1 3zM14 6l2 2M15 3l6 6" /></svg>
+          </div>
+          <h3>Modelldesign &amp; Konstruktion</h3>
+          <p>Ersatzteil, Halterung oder eigene Idee: Ich konstruiere dein Modell nach Maß – druckfertig.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ablauf -->
+  <section class="section section--alt" id="ablauf">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">So funktioniert’s</span>
+        <h2>In vier Schritten zum passenden Insert</h2>
+      </div>
+      <ol class="schritte">
+        {schritte.map((s, i) => (
+          <li class="schritt">
+            <span class="schritt__nr">{i + 1}</span>
+            <h3>{s.titel}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Projekte -->
+  <section class="section" id="projekte">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Projekte</span>
+        <h2>Aus der Werkstatt</h2>
+        <p class="lead">Jedes Insert entsteht für ein bestimmtes Spiel. Hier siehst du, was schon fertig ist.</p>
+      </div>
+      <div class="projekte">
+        {projekte.map((p) => <ProjektKarte projekt={p} />)}
+        <a class="projekt-leer" href="#anfrage">
+          <span class="projekt-leer__raster" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+          <strong>Dein Spiel fehlt noch?</strong>
+          <span>Erzähl mir davon – vielleicht ist es das nächste Projekt.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Über mich -->
+  <section class="section section--alt" id="ueber-mich">
+    <div class="wrap ueber">
+      <Picture
+        src={drucker}
+        formats={['avif', 'webp']}
+        widths={[400, 700, 1000]}
+        sizes="(max-width: 860px) 100vw, 440px"
+        alt="Der 3D-Drucker der Additiven Manufaktur mit geöffnetem Bauraum"
+        class="ueber__bild"
+      />
+      <div>
+        <span class="eyebrow">Über mich</span>
+        <h2>Hallo, ich bin Johannes.</h2>
+        <p class="lead">
+          Hinter der Additiven Manufaktur stehe ich – mit einem 3D-Drucker, einer CAD-Software und
+          einer Schwäche für gut sortierte Spieleschachteln.
+        </p>
+        <p>
+          Ich fertige 3D-gedruckte Teile nach Kundenwunsch und entwerfe eigene Modelle. Am liebsten
+          baue ich Inserts: Spiel ausmessen, Fächer planen, drucken, einpassen – bis alles sitzt.
+          Jedes Stück ist eine Einzelanfertigung aus Meerbusch.
+        </p>
+        <p>
+          Mehr aus der Werkstatt gibt es auf Instagram unter
+          <a href={site.instagram.url} rel="noopener">{site.instagram.handle}</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="fragen">
+    <div class="wrap faq">
+      <div class="section-head">
+        <span class="eyebrow">Häufige Fragen</span>
+        <h2>Gut zu wissen</h2>
+      </div>
+      <div class="faq__liste">
+        {fragen.map((f) => (
+          <details class="faq__item">
+            <summary>{f.frage}</summary>
+            <p>{f.antwort}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Anfrage />
+</Layout>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-block: clamp(40px, 7vw, 96px) clamp(56px, 9vw, 112px);
+    background:
+      radial-gradient(60% 70% at 85% 30%, var(--accent-soft) 0%, transparent 70%),
+      var(--bg);
+  }
+
+  .hero__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    list-style: none;
+    padding: 0;
+    margin: 32px 0 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+
+  .hero__facts li::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--sage);
+    margin-right: 8px;
+    vertical-align: 1px;
+  }
+
+  .hero__media {
+    position: relative;
+    margin: 0;
+  }
+
+  .hero__media :global(img) {
+    width: 100%;
+    aspect-ratio: 4 / 3.4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    transform: rotate(1.2deg);
+  }
+
+  .hero__badge {
+    position: absolute;
+    left: -18px;
+    bottom: 28px;
+    display: grid;
+    padding: 12px 18px;
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    font-size: 0.9rem;
+    line-height: 1.35;
+  }
+
+  .hero__badge strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+  }
+
+  .hero__badge span {
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 860px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .hero__media :global(img) {
+      transform: none;
+    }
+
+    .hero__badge {
+      left: 12px;
+      bottom: 12px;
+    }
+  }
+
+  /* Leistungen */
+  .leistungen {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .leistung {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: clamp(24px, 3vw, 36px);
+  }
+
+  .leistung p {
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .leistung--gross {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  .leistung--gross h3 {
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+  }
+
+  .leistung--gross p {
+    color: #d9cdbf;
+    margin-bottom: 1.2em;
+  }
+
+  .leistung--gross a {
+    color: #ffb48f;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .leistung--gross a:hover {
+    text-decoration: underline;
+  }
+
+  .leistung__tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  .leistung :global(.leistung__bild) {
+    width: 100%;
+    border-radius: var(--radius);
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .leistung__icon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    margin-bottom: 18px;
+  }
+
+  .leistung__icon svg {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: var(--accent-ink);
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @media (max-width: 860px) {
+    .leistungen,
+    .leistung--gross {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Ablauf */
+  .schritte {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  .schritt {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+  }
+
+  .schritt p {
+    color: var(--ink-soft);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  .schritt__nr {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+
+  @media (max-width: 980px) {
+    .schritte {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .schritte {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Projekte */
+  .projekte {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 24px;
+  }
+
+  .projekt-leer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 6px;
+    min-height: 280px;
+    padding: 32px;
+    border: 2px dashed var(--line);
+    border-radius: var(--radius-lg);
+    color: var(--ink);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .projekt-leer:hover {
+    border-color: var(--accent);
+    background: var(--surface);
+    color: var(--ink);
+  }
+
+  .projekt-leer strong {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+  }
+
+  .projekt-leer > span:last-child {
+    color: var(--ink-soft);
+  }
+
+  .projekt-leer__raster {
+    display: grid;
+    grid-template-columns: repeat(2, 22px);
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .projekt-leer__raster i {
+    height: 22px;
+    border-radius: 5px;
+    border: 2px solid var(--accent);
+  }
+
+  .projekt-leer__raster i:last-child {
+    background: var(--accent-soft);
+  }
+
+  /* Über mich */
+  .ueber {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: center;
+  }
+
+  .ueber :global(.ueber__bild) {
+    width: 100%;
+    aspect-ratio: 4 / 4.4;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+
+  @media (max-width: 860px) {
+    .ueber {
+      grid-template-columns: 1fr;
+    }
+
+    .ueber :global(.ueber__bild) {
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  /* FAQ */
+  .faq {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 40px;
+  }
+
+  .faq__liste {
+    display: grid;
+    gap: 12px;
+  }
+
+  .faq__item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0 22px;
+  }
+
+  .faq__item summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 18px 0;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .faq__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__item summary::after {
+    content: '+';
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--accent);
+    transition: transform 0.2s;
+  }
+
+  .faq__item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq__item p {
+    color: var(--ink-soft);
+    padding-bottom: 6px;
+  }
+
+  @media (max-width: 860px) {
+    .faq {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+  }
+</style>

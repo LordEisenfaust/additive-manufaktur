@@ -1,0 +1,41 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config';
+const { owner, name, address, email } = site;
+---
+
+<Layout title="Impressum" noindex>
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Impressum</h1>
+
+      <p>Angaben gemäß § 5 DDG:</p>
+      <p>
+        <strong>{owner} {name}</strong><br />
+        {address.street}<br />
+        {address.zip} {address.city}<br />
+        {address.country}
+      </p>
+
+      <h2>Kontakt</h2>
+      <p>E-Mail: <a href={`mailto:${email}`}>{email}</a></p>
+
+      <h2>Umsatzsteuer</h2>
+      <p>Es wird gemäß § 19 UStG keine Umsatzsteuer ausgewiesen.</p>
+
+      <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+      <p>
+        {owner}<br />
+        {address.street}<br />
+        {address.zip} {address.city}<br />
+        {address.country}
+      </p>
+
+      <h2>Verbraucherstreitbeilegung</h2>
+      <p>
+        Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.
+      </p>
+    </div>
+  </section>
+</Layout>

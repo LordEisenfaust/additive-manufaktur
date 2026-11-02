@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config';
+const { owner, name, address, email, formAccessKey } = site;
+---
+
+<Layout title="Datenschutz" noindex>
+  <section class="section">
+    <div class="wrap prose">
+      <h1>Datenschutzerklärung</h1>
+
+      <h2>1. Verantwortlicher</h2>
+      <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+      <p>
+        {owner} {name}<br />
+        {address.street}<br />
+        {address.zip} {address.city}<br />
+        {address.country}
+      </p>
+      <p>E-Mail: <a href={`mailto:${email}`}>{email}</a></p>
+      <p>Weitere Angaben findest du im <a href="/impressum/">Impressum</a>.</p>
+
+      <h2>2. Hosting bei GitHub Pages</h2>
+      <p>
+        Diese Website wird bei GitHub Pages gehostet, einem Dienst der GitHub Inc., 88 Colin P. Kelly
+        Jr. Street, San Francisco, CA 94107, USA (bzw. GitHub B.V. für Nutzer aus der EU/EWR).
+      </p>
+      <p>
+        Beim Aufruf dieser Seite verarbeitet GitHub Pages automatisch technische Daten, die dein
+        Browser übermittelt, insbesondere:
+      </p>
+      <ul>
+        <li>IP-Adresse</li>
+        <li>Datum und Uhrzeit der Anfrage</li>
+        <li>aufgerufene Seite/Datei und Referrer-URL</li>
+        <li>Browsertyp und Betriebssystem</li>
+      </ul>
+      <p>
+        Diese Daten werden in Server-Logfiles gespeichert. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f
+        DSGVO (berechtigtes Interesse an der technisch fehlerfreien Bereitstellung der Website). Auf
+        die genaue Speicherdauer und weitere Verarbeitung durch GitHub haben wir keinen Einfluss;
+        Details findest du in der Datenschutzerklärung von GitHub:
+        <a href="https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement"
+          >https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement</a
+        >
+      </p>
+      <p>
+        Da GitHub Pages teilweise über Server in den USA ausgeliefert wird, kann es zu einer
+        Datenübermittlung in die USA kommen. GitHub verweist hierfür auf entsprechende Garantien
+        (u. a. EU-Standardvertragsklauseln).
+      </p>
+
+      <h2>3. Keine Cookies, kein Tracking, keine Analyse-Tools</h2>
+      <p>
+        Diese Website setzt keine Cookies, kein Analyse-Tool (z. B. Google Analytics oder Matomo)
+        und keine Tracking- oder Marketing-Pixel ein. Es findet keine Auswertung deines
+        Nutzungsverhaltens durch uns statt.
+      </p>
+
+      <h2>4. Schriftarten</h2>
+      <p>
+        Die verwendeten Schriftarten werden direkt von dieser Website ausgeliefert. Es erfolgt kein
+        Nachladen von Schriftarten von externen Servern (z. B. Google Fonts).
+      </p>
+
+      <h2>5. Kontaktaufnahme</h2>
+      <p>
+        Wenn du uns per E-Mail kontaktierst, werden deine Angaben (E-Mail-Adresse, ggf. Name und
+        Nachrichteninhalt) zur Bearbeitung deiner Anfrage gespeichert und verarbeitet.
+        Rechtsgrundlage ist Art. 6 Abs. 1 lit. b bzw. lit. f DSGVO (Bearbeitung deiner Anfrage bzw.
+        berechtigtes Interesse an der Kommunikation). Die Daten werden gelöscht, sobald sie für die
+        Bearbeitung nicht mehr erforderlich sind.
+      </p>
+      {
+        formAccessKey ? (
+          <p>
+            Für das Anfrageformular nutzen wir den Dienst Web3Forms (https://web3forms.com). Die im
+            Formular eingegebenen Daten werden beim Absenden an Web3Forms übermittelt und von dort
+            per E-Mail an uns weitergeleitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
+            Weitere Informationen findest du in der Datenschutzerklärung von Web3Forms:
+            <a href="https://web3forms.com/privacy">https://web3forms.com/privacy</a>
+          </p>
+        ) : (
+          <p>
+            Das Anfrageformular auf dieser Website überträgt keine Daten an uns oder Dritte. Es
+            öffnet lediglich dein eigenes E-Mail-Programm mit einer vorausgefüllten Nachricht, die
+            du selbst absendest.
+          </p>
+        )
+      }
+
+      <h2>6. Verlinkte Social-Media-Profile</h2>
+      <p>
+        Auf dieser Website befinden sich Links zu unserem Profil bei Instagram. Es handelt sich um
+        reine Verlinkungen, nicht um eingebettete Plugins oder Widgets. Beim Anklicken eines Links
+        verlässt du diese Website; es gilt dann die Datenschutzerklärung des jeweiligen Anbieters.
+        Allein durch den Besuch dieser Seite findet keine Datenübertragung an Instagram statt.
+      </p>
+
+      <h2>7. Deine Rechte</h2>
+      <p>
+        Du hast das Recht auf Auskunft, Berichtigung, Löschung oder Einschränkung der Verarbeitung
+        deiner personenbezogenen Daten sowie ein Recht auf Datenübertragbarkeit und Widerspruch gegen
+        die Verarbeitung, jeweils nach Maßgabe der Art. 15–21 DSGVO. Wende dich dazu einfach an die
+        oben genannte E-Mail-Adresse.
+      </p>
+      <p>
+        Außerdem hast du das Recht, dich bei einer Datenschutz-Aufsichtsbehörde zu beschweren, z. B.
+        bei der für Nordrhein-Westfalen zuständigen Landesbeauftragten für Datenschutz und
+        Informationsfreiheit.
+      </p>
+
+      <h2>8. Aktualität dieser Erklärung</h2>
+      <p>
+        Diese Datenschutzerklärung kann bei Änderungen der Website oder der zugrunde liegenden
+        rechtlichen Vorgaben angepasst werden. Es gilt jeweils die aktuell auf dieser Seite
+        veröffentlichte Fassung.
+      </p>
+    </div>
+  </section>
+</Layout>
