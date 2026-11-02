@@ -73,13 +73,29 @@ const { owner, name, address, email, formAccessKey } = site;
       </p>
       {
         formAccessKey ? (
-          <p>
-            Für das Anfrageformular nutzen wir den Dienst Web3Forms (https://web3forms.com). Die im
-            Formular eingegebenen Daten werden beim Absenden an Web3Forms übermittelt und von dort
-            per E-Mail an uns weitergeleitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO.
-            Weitere Informationen findest du in der Datenschutzerklärung von Web3Forms:
-            <a href="https://web3forms.com/privacy">https://web3forms.com/privacy</a>
-          </p>
+          <>
+            <p>
+              Für das Anfrageformular nutzen wir den Dienst Web3Forms (Web3Creative,
+              https://web3forms.com) als Auftragsverarbeiter. Die im Formular eingegebenen Daten
+              (Name, E-Mail-Adresse, Angaben zum Spiel und deine Nachricht) sowie deine IP-Adresse
+              werden beim Absenden an Web3Forms übermittelt und von dort per E-Mail an uns
+              weitergeleitet. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO (Bearbeitung deiner
+              Anfrage bzw. Anbahnung eines Auftrags).
+            </p>
+            <p>
+              Web3Forms hat seinen Sitz in Indien und nutzt Infrastruktur u. a. von Amazon Web
+              Services, Cloudflare und Hetzner. Zur Abwehr von Spam können IP-Adresse und
+              E-Mail-Adresse an die Dienste CleanTalk und Akismet übermittelt werden. Für die
+              Übermittlung in Länder außerhalb der EU stützt sich Web3Forms auf
+              EU-Standardvertragsklauseln. Laut Anbieter werden Formulardaten höchstens drei Jahre
+              gespeichert. Weitere Informationen findest du in der Datenschutzerklärung von
+              Web3Forms:
+              <a href="https://web3forms.com/privacy">https://web3forms.com/privacy</a>
+            </p>
+            <p>
+              Wenn du das nicht möchtest, schreib uns einfach direkt per E-Mail.
+            </p>
+          </>
         ) : (
           <p>
             Das Anfrageformular auf dieser Website überträgt keine Daten an uns oder Dritte. Es

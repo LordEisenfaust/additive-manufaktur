@@ -19,7 +19,7 @@ export const site = {
   },
   // Zugangsschlüssel von web3forms.com. Leer = das Formular öffnet
   // stattdessen das E-Mail-Programm mit einer fertig ausgefüllten Nachricht.
-  formAccessKey: '',
+  formAccessKey: 'ec3be907-e6c3-4da4-8af7-dcd5dc98b654',
 };
 
 export const nav = [
